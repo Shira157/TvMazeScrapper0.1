@@ -1,0 +1,22 @@
+﻿@model string
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Show's list with Cast (JSON)</h2>
+        </div>
+    </div>
+    <div class="row pt-4">
+        <a asp-controller="Shows" asp-action="GetFirstShowPage" class="btn btn-primary btn-block">Sync First Page (250)</a>
+        <a asp-controller="Shows" asp-action="GetAllShows" class="btn btn-danger btn-block">Sync All</a>
+        
+        @if (Model != null && Model.Any())
+        {
+            <pre>@Model</pre>
+        }
+        else
+        {
+            <p>No data available.</p>
+        }
+    </div>
+</div>

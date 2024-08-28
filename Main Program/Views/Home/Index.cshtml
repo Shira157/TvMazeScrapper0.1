@@ -1,0 +1,59 @@
+﻿@model TvMazeScrapper.Models.ViewModels.ShowsListViewModel
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Show's list with Cast</h2>
+        </div>
+    </div>
+    <div class="row pt-4">
+        @* <div class="col-4">
+            <a asp-controller="Shows" asp-action="GetFirstShowPage" class="btn btn-primary btn-block">Sync First Page (250)</a>
+            <a asp-controller="Shows" asp-action="GetAllShows" class="btn btn-danger btn-block">Sync All</a>
+        </div> *@
+
+        <div class="col-12 pt-4 mt-4">
+            @if (Model != null && Model.Shows.Any())
+            {
+                <table class="table table-bordered">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Id</th>
+                            <th>Show</th>
+                            <th>Cast Name</th>
+                            <th>Birthday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var show in Model.Shows)
+                        {
+                            var firstRow = true; 
+                            foreach (var cast in show.Cast)
+                            {
+                                <tr>
+                                    @if (firstRow)
+                                    {
+                                        <td>@show.Id</td>
+                                        <td>@show.Name</td>
+                                        firstRow = false;
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                        <td></td>
+                                    }
+                                    <td>@cast.Name</td>
+                                    <td>@cast.Birthday?.ToString("yyyy-MM-dd")</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>@ViewBag.Message</p> <!-- Display the message from ViewBag -->
+            }
+        </div>
+    </div>
+</div>

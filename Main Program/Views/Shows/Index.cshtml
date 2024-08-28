@@ -1,0 +1,28 @@
+﻿@using Newtonsoft.Json
+@model TvMazeScrapper.Models.ViewModels.ShowsListViewModel
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Show's list with Cast (JSON)</h2>
+        </div>
+    </div>
+    <div class="row p-4">
+        <div class="col-4">
+            <a asp-controller="Shows" asp-action="GetFirstShowPage" class="btn btn-primary btn-block">Sync First Page (250)</a>
+            <a asp-controller="Shows" asp-action="GetAllShows" class="btn btn-danger btn-block">Sync All</a>
+        </div>
+
+        <div class="card row pt-4 mt-4 text-bg-light">
+            @if (Model != null && Model.Shows.Any())
+            {
+                // Output the JSON formatted string using Html.Raw for safe rendering
+                <pre>@Html.Raw(JsonConvert.SerializeObject(Model.Shows, Formatting.Indented))</pre>
+            }
+            else
+            {
+                <p>No data available.</p>
+            }
+        </div>
+    </div>
+</div>
